@@ -1,0 +1,10 @@
+key,value
+Power,AC_POWER
+Volts,AC_VOLTAGE
+Energy,ENERGY_DELIVERED
+Frequency,FREQUENCY
+Temperature,T_ASSET
+SolarA,5000.01.001
+Inverter1,INV01
+Inverter2,INV02
+Inverter3,INV03

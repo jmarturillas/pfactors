@@ -1,0 +1,35 @@
+Write a python3 script to manipulate the data in the input directory into the form of the sample output file.  Output files are to be named [file_name]_parsed.csv.  A completely parsed output of the first day's data (File277455_parsed.csv) has been provided to show what one of the output files should look like.  
+
+Your input files are comma separated value files representing 3 days of a solar power plant's data in a wide table format.  Your task is to reformat the data into new csv files in a long table format with the following columns: tag,time,value .  
+
+We need to rename the Site (column 3), Device (column 4), and individual tag columns (columns 5-9) to Power Factor's tag names, as defined in the file dictionary.csv.  For example, every time Power appears in an input file, it must be renamed to AC_POWER.  Every time SolarA appears it must be renamed to 5000.01.001.  Refer to the dictionary.csv file for more information.  
+
+Requirements:
+1. AC_POWER and ENERGY_DELIVERED values must be converted from W and Wh in the input file to kW and kWh in the output file (hint: divide input values by 1000)
+2. The timezone of the input data is UTC+7.  Convert this timestamp to UTC in the output file
+3. The output csv file has no headers
+
+Example:
+
+Input file (tags are in wide table format (ie several tags associated with a timestamp)):
+
+    Date,Time,Site,Device,Power,Volts,Energy,Frequency,Temperature
+    1/1/2020,6:15:00,SolarA,Inverter1,51.642278,236.8240333,275012.9106,49.96051844,22.44291668
+
+Output file (tags are in a long format (ie each tag has its own timestamp)):
+    5000.01.001.INV01.AC_POWER,1/1/20 13:15:00,0.051642278
+    5000.01.001.INV01.AC_VOLTAGE,1/1/20 13:15:00,236.8240333
+    5000.01.001.INV01.ENERGY_DELIVERED,1/1/20 13:15:00,275012.9106
+    5000.01.001.INV01.FREQUENCY,1/1/20 13:15:00,49.96051844
+    5000.01.001.INV01.TEMPERATURE,1/1/20 13:15:00,22.44291668
+
+
+Tips:
+You can use any standard python3 libraries you want to complete this task, but you may find the following libraries and functions helpful:
+
+pandas
+glob
+pytz
+os
+melt
+
