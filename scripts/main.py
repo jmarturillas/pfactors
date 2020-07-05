@@ -2,12 +2,18 @@ from os.path import abspath, dirname
 import pandas as pd
 import glob
 import pytz as tz
-from dateutil import parser
 from datetime import datetime
 
 root_dir = "pfactors"
 path = abspath(__file__)
 _here = path.split(root_dir)[0] + root_dir
+
+"""
+NOTE : 
+
+Timestamp is converted in 'Etc/GMT+7'
+
+"""
 
 
 class Parser(object):
@@ -141,4 +147,9 @@ if __name__ == '__main__':
             df_temperature.loc[i, 'value'] = temperature_value
 
         data = pd.concat([df_power, df_volts, df_energy, df_frequency, df_temperature])
-        data.to_csv(output_file_path + "/{file_name}_parsed.csv".format(file_name=file_name), index=False, header=False)
+
+        try:
+            data.to_csv(output_file_path + "/{file_name}_parsed.csv".format(file_name=file_name), index=False, header=False)
+            print("{file_name}_parsed.csv is successfully created in {output_file_path}".format(file_name=file_name, output_file_path=output_file_path))
+        except Exception as e:
+            print(e)
